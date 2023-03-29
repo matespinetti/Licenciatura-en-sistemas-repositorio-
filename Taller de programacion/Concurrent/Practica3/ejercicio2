@@ -1,0 +1,99 @@
+programa ejercicio2
+procesos
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  proceso juntarFlores (ES cantFlores: numero)
+  comenzar 
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1
+  fin
+  proceso juntarPapeles (ES cantPapeles: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+  fin
+  
+  proceso escalonFlores (E n: numero; ES cantFlores: numero)
+  comenzar
+    repetir n
+      juntarFlores (cantFlores)
+      mover
+    derecha
+    repetir n
+      juntarFlores (cantFlores)
+      mover    
+    izquierda
+  fin
+  proceso escalonPapeles (E n: numero; ES cantPapeles: numero)
+  comenzar
+    repetir n
+      juntarPapeles (cantPapeles)
+      mover
+    izquierda
+    repetir n
+      juntarPapeles (cantPapeles)
+      mover
+    derecha
+  fin
+  
+areas
+  ciudad = AreaC (1, 1, 100, 100)
+  
+robots
+  robot florero
+  variables
+    cantFlores, dim: numero
+  comenzar     
+    cantFlores := 0
+    dim := 5
+    repetir 4
+      escalonFlores (dim, cantFlores)
+      dim := dim - 1
+    juntarFlores (cantFlores)
+    mover
+    derecha
+    BloquearEsquina (PosAv + 1, PosCa)
+    mover
+    EnviarMensaje (1, f1)
+    repetir 2
+      derecha
+    mover
+    LiberarEsquina (PosAv + 1, PosCa)
+    dim := 2
+    repetir 4
+      escalonFlores (dim, cantFlores)
+      dim := dim + 1
+    juntarFlores (cantFlores)
+    Informar (cantFlores)
+  fin
+  robot florero
+  variables
+    cantFlores, dim: numero
+  comenzar     
+    cantFlores := 0
+    dim := 5
+    repetir 4
+      escalonFlores (dim, cantFlores)
+      dim := dim - 1
+    juntarFlores (cantFlores)
+    mover
+    derecha
+    BloquearEsquina (PosAv + 1, PosCa)
+    mover
+    EnviarMensaje (1, f1)
+    repetir 2
+      derecha
+    mover
+    LiberarEsquina (PosAv + 1, PosCa)
+    dim := 2
+    repetir 4
+      escalonFlores (dim, cantFlores)
+      dim := dim + 1
+    juntarFlores (cantFlores)
+    Informar (cantFlores)
+  fin

@@ -1,0 +1,109 @@
+programa parcial2020
+procesos
+  proceso limpiarPapeles (ES cantPapeles: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1 
+  fin
+  proceso limpiarFlores (ES cantFlores: numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1 
+  fin
+areas
+  areaA: AreaPC (2, 4, 12, 24)
+  areaV: AreaPC (16, 4, 26, 24)
+  areaF: AreaP (1, 1, 1, 1)
+robots
+  robot papelero
+  variables
+    cantPapeles, id : numero
+  comenzar
+    cantPapeles := 0
+    RecibirMensaje (id, f1)
+    repetir 7
+      limpiarPapeles (cantPapeles)
+      mover
+    limpiarPapeles (cantPapeles)
+    BloquearEsquina (PosAv, PosCa + 1)
+    mover
+    limpiarPapeles (cantPapeles)
+    mover
+    LiberarEsquina (PosAv, PosCa - 1)
+    repetir 11
+      limpiarPapeles (cantPapeles)
+      mover
+    limpiarPapeles (cantPapeles)
+    EnviarMensaje (id, f1)
+    EnviarMensaje (cantPapeles, f1)
+  fin
+  robot florero
+  variables
+    id, cantFlores : numero
+  comenzar
+    cantFlores := 0
+    RecibirMensaje (id, f1)
+    derecha
+    repetir 4
+      limpiarFlores (cantFlores)
+      mover
+    limpiarFlores (cantFlores)
+    BloquearEsquina (PosAv + 1, PosCa)
+    mover
+    limpiarFlores (cantFlores)
+    mover
+    LiberarEsquina (PosAv - 1, PosCa)
+    repetir 4
+      limpiarFlores (cantFlores)
+      mover
+    EnviarMensaje (id, f1)
+    EnviarMensaje (cantFlores, f1)
+  fin
+  robot fiscalizador
+  variables
+    id, cant, cantA, cantV: numero
+  comenzar
+    EnviarMensaje (1, robotPA)
+    EnviarMensaje (2, robotFA)
+    EnviarMensaje (3, robotPV)
+    EnviarMensaje (4, robotFV)
+    cantA := 0
+    cantV := 0
+    repetir 4
+      RecibirMensaje (id, *)
+      si (id = 1) | (id = 2)
+        si (id = 1)
+          RecibirMensaje (cant, robotPA)
+        sino
+          RecibirMensaje (cant, robotFA)
+        cantA := cantA + cant
+      sino
+        si (id = 3)
+          RecibirMensaje (cant, robotPV)
+        sino
+          RecibirMensaje (cant, robotFV)
+        cantV := cantV + 1
+    si (cantA > cantV)
+      Informar (500)
+      Informar (cantA)
+    sino
+      Informar (300)  
+  fin
+variables
+  robotPA, robotPV: papelero
+  robotFA, robotFV: florero
+  f1: fiscalizador
+comenzar
+  AsignarArea (robotPA, areaA)
+  AsignarArea (robotFA, areaA)
+  AsignarArea (robotFV, areaV)
+  AsignarArea (robotPV, areaV)
+  AsignarArea (f1, areaF)
+  Iniciar (robotFA, 2, 12)
+  Iniciar (robotFV, 16, 12)
+  Iniciar (robotPA, 7, 4)
+  Iniciar (robotPV, 21, 4)
+  Iniciar (f1, 1, 1)
+fin 

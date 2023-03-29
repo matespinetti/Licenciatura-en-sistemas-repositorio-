@@ -1,0 +1,158 @@
+programa parcial12022
+procesos
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha 
+  fin 
+  proceso limpiarFlores (ES cantFlores : numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1 
+  fin
+areas
+  areaA : AreaPC (10, 19, 19, 21)
+  areaV : AreaPC (21, 19, 30, 21)
+  esquina20: AreaPC (20, 20, 20, 20)
+  area1A: AreaP (9, 19, 9, 19)
+  area2A: AreaP (9, 20, 9, 20)
+  area3A: AreaP (9, 21, 9, 21)
+  area1V: AreaP (31, 19, 31, 19)
+  area2V: AreaP (31, 20, 31, 20)
+  area3V: AreaP (31, 21, 31, 21)
+  areaF : AreaP (20, 18, 20, 18)
+robots
+  robot lateral
+  variables
+    cantFlores, id: numero
+    esVerde : boolean
+  comenzar
+    RecibirMensaje (id, f1)
+    si (id = 1) | (id = 3)
+      derecha
+    sino
+      izquierda
+    mover
+    repetir 9
+      cantFlores := 0
+      limpiarFlores (cantFlores)
+      si ((id = 1) | (id = 4))
+        BloquearEsquina (PosAv,PosCa + 1)
+        Pos (PosAv, PosCa + 1)
+      sino
+        BloquearEsquina (PosAv, PosCa - 1)
+        Pos (PosAv, PosCa - 1)
+      repetir cantFlores
+        depositarFlor
+      si (id = 1) | (id = 4)
+        Pos (PosAv, PosCa - 1)
+        LiberarEsquina (PosAv, PosCa + 1)
+      sino
+        Pos (PosAv, PosCa + 1)
+        LiberarEsquina (PosAv, PosCa - 1)
+      mover
+    si (id = 1) | (id = 3)
+      EnviarMensaje (V, robotCA)
+    sino
+      EnviarMensaje (V, robotCV)     
+  fin
+  
+  robot central
+  variables
+    puedo: boolean
+    cantFlores, id: numero
+  comenzar
+    RecibirMensaje (id, f1)
+    si (id = 2)
+      RecibirMensaje (puedo, lateralA1)
+      RecibirMensaje (puedo, lateralA2)
+      derecha
+    sino
+      RecibirMensaje (puedo, lateralV1)
+      RecibirMensaje (puedo, lateralV2)
+      izquierda
+    cantFlores := 0
+    mover
+    repetir 9
+      limpiarFlores (cantFlores)
+      mover
+    limpiarFlores (cantFlores)
+    BloquearEsquina (20, 20)
+    mover
+    EnviarMensaje (id, f1)
+    EnviarMensaje (cantFlores, f1)
+    repetir cantFlores
+      depositarFlor
+    repetir 2
+      derecha
+    mover
+    LiberarEsquina (20, 20)
+      
+    
+  fin
+  
+  robot fiscalizador
+  variables
+    noGano : boolean
+    idGanador, maxId, maxCant, cant, id: numero
+  comenzar
+    EnviarMensaje (1, lateralA1)
+    EnviarMensaje (2, robotCA)
+    EnviarMensaje (3, lateralA2)
+    EnviarMensaje (4, lateralV1)
+    EnviarMensaje (5, robotCV)
+    EnviarMensaje (6, lateralV2)
+    noGano := V
+    maxCant := -1
+    repetir 2
+      RecibirMensaje (id, *)
+      si (noGano)
+        idGanador := id
+        noGano := F
+      si (id = 2)
+        RecibirMensaje (cant, robotCA)
+      sino
+        RecibirMensaje (cant, robotCV)
+      si (cant > maxCant)
+        maxCant := cant
+        maxId := id
+    Informar (idGanador)
+    Informar (maxId)
+  
+  fin
+  
+variables
+  lateralA1, lateralA2, lateralV1, lateralV2: lateral
+  robotCA, robotCV: central
+  f1: fiscalizador
+  
+comenzar
+  AsignarArea (lateralA1, areaA)  
+  AsignarArea (lateralA2, areaA)
+  AsignarArea (robotCA, areaA)
+  AsignarArea (lateralV1, areaV)
+  AsignarArea (lateralV2, areaV)
+  AsignarArea (robotCV, areaV)
+  AsignarArea (robotCA, esquina20)
+  AsignarArea (robotCV, esquina20)
+  AsignarArea (lateralA1, area1A)
+  AsignarArea (robotCA, area2A)
+  AsignarArea (lateralA2, area3A)
+  AsignarArea (lateralV1, area1V)
+  AsignarArea (robotCV, area2V)
+  AsignarArea (lateralV2, area3V)
+  AsignarArea (f1, areaF)
+  Iniciar (lateralA1, 9, 19)
+  Iniciar (robotCA, 9, 20)
+  Iniciar (lateralA2, 9, 21)
+  Iniciar (lateralV1, 31, 19)
+  Iniciar (robotCV, 31, 20)
+  Iniciar (lateralV2, 31, 21)
+  Iniciar (f1, 20, 18)
+fin
+  
+ 
+  
+  
+

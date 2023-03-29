@@ -1,0 +1,98 @@
+programa ejcuadrados
+procesos
+  proceso abajo
+  comenzar
+    repetir 2
+      derecha
+  
+  fin
+  proceso limpiarPapeles (ES cantPapeles: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+  
+  fin
+  
+areas
+  area1: AreaPC (3, 3, 13, 13)
+  area2: AreaPC (16, 3, 26, 13)
+  areaF: AreaP (14, 6, 14, 6)
+  
+robots
+  robot papelero
+  variables
+    id, cantPapeles: numero
+    habilitado: boolean
+   
+  comenzar
+    id := 1
+    cantPapeles := 0
+    BloquearEsquina (PosAv, PosCa)
+    limpiarPapeles (cantPapeles)
+    repetir 10
+      BloquearEsquina (PosAv, PosCa - 1)
+      mover
+      LiberarEsquina (PosAv, PosCa + 1)
+      limpiarPapeles (cantPapeles)
+    derecha
+    repetir 10
+      BloquearEsquina (PosAv - 1, PosCa)
+      mover
+      LiberarEsquina (PosAv + 1, PosCa)
+      limpiarPapeles (cantPapeles)
+    derecha
+    repetir 10
+      BloquearEsquina (PosAv, PosCa + 1)
+      mover
+      LiberarEsquina (PosAv, PosCa - 1)
+      limpiarPapeles (cantPapeles)
+    derecha
+    repetir 10
+      BloquearEsquina (PosAv + 1, PosCa)
+      mover
+      LiberarEsquina (PosAv - 1, PosCa)
+      limpiarPapeles (cantPapeles)
+    EnviarMensaje (id, f1)
+    EnviarMensaje (cantPapeles, f1)
+    
+  fin
+  robot florero
+  variables
+    id, cantPapeles: numero
+    habilitado: boolean
+   
+  comenzar
+    id := 1
+    cantPapeles := 0
+    BloquearEsquina (PosAv, PosCa)
+    limpiarPapeles (cantPapeles)
+    repetir 10
+      BloquearEsquina (PosAv, PosCa - 1)
+      mover
+      LiberarEsquina (PosAv, PosCa + 1)
+      limpiarPapeles (cantPapeles)
+    derecha
+    repetir 10
+      BloquearEsquina (PosAv - 1, PosCa)
+      mover
+      LiberarEsquina (PosAv + 1, PosCa)
+      limpiarPapeles (cantPapeles)
+    derecha
+    repetir 10
+      BloquearEsquina (PosAv, PosCa + 1)
+      mover
+      LiberarEsquina (PosAv, PosCa - 1)
+      limpiarPapeles (cantPapeles)
+    derecha
+    repetir 10
+      BloquearEsquina (PosAv + 1, PosCa)
+      mover
+      LiberarEsquina (PosAv - 1, PosCa)
+      limpiarPapeles (cantPapeles)
+    EnviarMensaje (id, f1)
+    EnviarMensaje (cantPapeles, f1)
+    
+  fin
+
+  

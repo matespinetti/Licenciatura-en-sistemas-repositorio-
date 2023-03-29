@@ -1,0 +1,120 @@
+programa parcial20222
+procesos
+  proceso limpiarFlores(ES cantFlores: numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1
+  
+  fin
+  
+areas
+  areaT1: AreaP (1, 1, 6, 6)
+  areaT2: AreaP (7, 1, 12, 6)
+  areaT3: AreaP (13, 1, 18, 6)
+  areaC : AreaP (20, 1, 20, 1)
+  esquina10 : AreaPC (10, 10, 10, 10)
+  
+
+robots
+  robot trabajador
+  variables
+    cantFlores, avRet, id, cant: numero
+    perdi, habilitado: boolean
+  comenzar
+    cantFlores := 0
+    RecibirMensaje (id, c1)
+    Informar (id)
+    repetir 4
+      RecibirMensaje (habilitado, c1)
+      repetir 5
+        limpiarFlores (cantFlores)
+        mover
+      derecha
+      EnviarMensaje (V, c1)
+    RecibirMensaje (habilitado, c1)
+    EnviarMensaje (id, c1)
+    EnviarMensaje (cantFlores, c1)
+    Informar (300)
+    RecibirMensaje (perdi, c1)
+    avRet := PosAv
+    cant := cantFlores
+    si (perdi)
+      repetir cant
+        BloquearEsquina (10, 10)
+        Pos (10, 10)
+        si (cantFlores > 0)
+          depositarFlor
+          cantFlores := cantFlores - 1
+        Pos (avRet, 1)
+        LiberarEsquina (10, 10)
+      
+  fin
+  
+  robot coordinador
+  variables
+    aux : boolean
+    cantF, maxCant, maxId, id: numero
+  comenzar
+    EnviarMensaje (1, t1)
+    EnviarMensaje (2, t2)
+    EnviarMensaje (3, t3)
+    repetir 4
+      EnviarMensaje (V, t1)
+      EnviarMensaje (V, t2)
+      EnviarMensaje (V, t3)
+      RecibirMensaje (aux, *)
+      RecibirMensaje (aux, *)
+      RecibirMensaje (aux, *)
+    EnviarMensaje (V, t1)
+    EnviarMensaje (V, t2)
+    EnviarMensaje (V, t3)
+    Informar (500)
+    maxCant := -1
+    repetir 3
+      RecibirMensaje (id, *)
+      si (id = 1)
+        RecibirMensaje (cantF, t1)
+      sino
+        si (id = 2)
+          RecibirMensaje (cantF, t2)
+        sino
+          RecibirMensaje (cantF, t3)
+      si (cantF > maxCant)
+        maxCant := cantF
+        maxId := id
+    Informar (maxId)
+    si (maxId = 1)
+      EnviarMensaje (F, t1)
+      EnviarMensaje (V, t2)
+      EnviarMensaje (V, t3)
+    sino
+      si (maxId = 2)
+        EnviarMensaje (V, t1)
+        EnviarMensaje (F, t2)
+        EnviarMensaje (V, t3)
+      sino
+        EnviarMensaje (V, t1)
+        EnviarMensaje (V, t2)
+        EnviarMensaje (F, t3)
+  fin
+  
+variables
+  t1, t2, t3: trabajador
+  c1: coordinador
+  
+comenzar
+  AsignarArea (t1, areaT1)
+  AsignarArea (t2, areaT2)
+  AsignarArea (t3, areaT3)
+  AsignarArea (c1, areaC)
+  AsignarArea (t1, esquina10)
+  AsignarArea (t2, esquina10)
+  AsignarArea (t3, esquina10)
+  Iniciar (t1, 1, 1)
+  Iniciar (t2, 7, 1)
+  Iniciar (t3, 13, 1)
+  Iniciar (c1, 20, 1)
+
+
+fin

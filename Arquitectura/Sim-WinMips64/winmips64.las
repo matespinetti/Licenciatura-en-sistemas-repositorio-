@@ -1,0 +1,1 @@
+C:\Licenciatura en sistemas\Arquitectura\MIPS64\ATASCOS\parcialanazi.s

@@ -1,0 +1,87 @@
+programa ejercicio4
+procesos
+  proceso esPar (E n: numero; ES par: boolean)
+  comenzar
+    mientras (n > 0)
+      n := n - 2
+    
+    si (n = 0)
+      par := V
+    sino
+      par := F
+  
+  fin
+  proceso tomarFloresEsquina
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  
+  proceso tomarPapelesEsquina
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  
+ 
+  
+  
+  proceso recorrerPar 
+  variables
+    par : boolean
+  comenzar
+    repetir 25
+      tomarPapelesEsquina
+      repetir 99
+        mover
+        tomarPapelesEsquina
+      Pos(PosAv + 1, 1) 
+  fin
+  
+  proceso recorrerImpar
+  comenzar
+    repetir 25
+      tomarFloresEsquina
+      repetir 99
+        mover
+        tomarFloresEsquina
+      Pos(PosAv + 1, 1)
+  fin
+  
+  
+  
+areas
+  area1: AreaP(1,1,25,100)
+  area2: AreaP (26,1, 50, 100)
+  area3: AreaP (51, 1, 75, 100)
+  area4: AreaP (76, 1, 100, 100)
+  
+robots
+  robot robotPar
+  comenzar
+    recorrerPar 
+    Pos (76, 1)
+    recorrerPar 
+  fin
+  
+  robot robotImpar
+  comenzar
+    recorrerImpar 
+    Pos (51, 1)
+    recorrerImpar
+  fin
+
+variables
+  rPar: robotPar
+  rImpar: robotImpar
+  
+comenzar
+  AsignarArea (rImpar, area1)
+  AsignarArea (rImpar, area3)
+  AsignarArea (rPar, area2)
+  AsignarArea (rPar, area4)
+  Iniciar (rImpar, 1, 1)
+  Iniciar (rPar, 26, 1)
+
+
+fin

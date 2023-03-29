@@ -1,0 +1,104 @@
+programa ejercicio1
+procesos
+  proceso limpiarFlores (ES cantFlores: numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1
+  fin
+  proceso limpiarPapeles (ES cantPapeles: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+  
+  fin
+  proceso depositarFlores (E cantFlores: numero)
+  comenzar
+    repetir cantFlores
+      depositarFlor
+  fin
+  proceso depositarPapeles (E cantPapeles: numero)
+  comenzar
+    repetir cantPapeles
+      depositarPapel
+  
+  fin
+  
+areas
+  areaF : AreaPC (1, 1, 5, 10)
+  areaP : AreaPC (6, 1, 10, 9)
+  areaF1 : AreaP (6, 10, 6, 10)
+  areaF2 : AreaP (7, 10, 7, 10)
+  areaP1 : AreaP (8, 10, 8, 10)
+  areaP2 : AreaP (9, 10, 9, 10)
+  esquinaD : AreaC (10, 10, 10, 10)
+
+robots
+  robot florero
+  variables
+    cantFlores, avenida, calle, avOrigen: numero
+  comenzar
+    cantFlores := 0
+    avOrigen := PosAv
+    repetir 5
+      Random (avenida, 1, 5)
+      Random (calle, 1, 10)
+      BloquearEsquina (avenida, calle)
+      Pos (avenida, calle)
+      limpiarFlores (cantFlores)
+      Pos (avOrigen, 10 )
+      LiberarEsquina (avenida, calle)
+    BloquearEsquina (10, 10)
+    Pos (10, 10)
+    depositarFlores (cantFlores)
+    Pos (avOrigen, 10)
+    LiberarEsquina (10, 10) 
+  fin
+  
+  robot papelero
+  variables
+    cantPapeles, avenida, calle, avOrigen: numero
+  comenzar
+    cantPapeles := 0
+    avOrigen := PosAv
+    repetir 5
+      Random (avenida, 6, 10)
+      Random (calle, 1, 9)
+      BloquearEsquina (avenida, calle)
+      Pos (avenida, calle)
+      limpiarPapeles (cantPapeles)
+      Pos (avOrigen, 10 )
+      LiberarEsquina (avenida, calle)
+    BloquearEsquina (10, 10)
+    Pos (10, 10)
+    depositarPapeles (cantPapeles)
+    Pos (avOrigen, 10)
+    LiberarEsquina (10, 10) 
+  fin
+  
+variables
+  f1, f2: florero
+  p1, p2 : papelero
+  
+comenzar
+  AsignarArea (f1, areaF1)
+  AsignarArea (f2, areaF2)
+  AsignarArea (p1, areaP1)
+  AsignarArea (p2, areaP2)
+  AsignarArea (f1, areaF)
+  AsignarArea (f2, areaF)
+  AsignarArea (p1, areaP)
+  AsignarArea (p2, areaP)
+  AsignarArea (f1, esquinaD )
+  AsignarArea (f2, esquinaD )
+  AsignarArea (p1, esquinaD )
+  AsignarArea (p2, esquinaD )
+  Iniciar (f1, 6, 10)
+  Iniciar (f2, 7, 10)
+  Iniciar (p1, 8, 10)
+  Iniciar (p2, 9, 10)
+ 
+fin
+
+  

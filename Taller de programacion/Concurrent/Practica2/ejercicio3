@@ -1,0 +1,83 @@
+programa ejercicio3
+procesos
+  proceso juntarPapeles (ES cantPapeles: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1  
+  fin
+  proceso juntarFlores (ES cantFlores: numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1
+  fin
+  proceso recorrerEquipoA (ES cantPapeles: numero)
+  comenzar
+    derecha
+    juntarPapeles (cantPapeles)
+    repetir 9
+      mover
+      juntarPapeles (cantPapeles)
+  fin
+  proceso recorrerEquipoB (ES cantFlores: numero)
+  comenzar
+    derecha
+    juntarFlores (cantFlores)
+    repetir 9
+      mover 
+      juntarFlores (cantFlores)
+  fin
+
+areas
+  area1A: AreaP (1, 1, 10, 1)
+  area2A: AreaP (11, 1, 20, 1)
+  area1B: AreaP (1, 5, 10, 5)
+  area2B: AreaP (11, 5, 20, 5)
+  
+robots
+  robot equipoA
+  variables
+    cantPapeles: numero
+  comenzar
+    cantPapeles := 0
+    si (PosAv = 1)
+      recorrerEquipoA (cantPapeles)
+      EnviarMensaje (cantPapeles, robotA2)
+    sino
+      RecibirMensaje (cantPapeles, robotA1)
+      recorrerEquipoA(cantPapeles)
+      Informar (cantPapeles)
+  fin
+  robot equipoB
+  variables
+    cantFlores: numero
+  comenzar
+    cantFlores:= 0
+    si (PosAv = 1)
+      recorrerEquipoB (cantFlores)
+      EnviarMensaje (cantFlores, robotB2)
+    sino
+      RecibirMensaje (cantFlores, robotB1)
+      recorrerEquipoB(cantFlores)
+      Informar (cantFlores)
+  fin
+  
+variables
+  robotA1, robotA2 : equipoA
+  robotB1, robotB2: equipoB
+
+comenzar
+  AsignarArea (robotA1, area1A )
+  AsignarArea (robotA2, area2A)
+  AsignarArea (robotB1, area1B)
+  AsignarArea (robotB2, area2B)
+  Iniciar (robotA1, 1, 1)
+  Iniciar (robotA2, 11, 1)
+  Iniciar (robotB1, 1, 5)
+  Iniciar (robotB2, 11, 5)
+fin
+  
+
+  
+  

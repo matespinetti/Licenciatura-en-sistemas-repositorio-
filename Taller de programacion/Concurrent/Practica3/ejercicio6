@@ -1,0 +1,183 @@
+programa ejercicio5
+procesos
+  proceso limpiarFlores 
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+  
+  fin
+  
+  proceso limpiarPapeles
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+  
+  fin
+  
+  proceso limpiarPapelesYFlores
+  comenzar
+    limpiarFlores
+    limpiarPapeles
+  
+  fin
+  
+  proceso recorrerFlores
+  comenzar
+    derecha
+    mientras ((HayFlorEnLaBolsa) & (PosAv < 100))
+      depositarFlor
+      mover
+    si (HayFlorEnLaBolsa)
+      depositarFlor 
+  fin
+  
+  proceso recorrerPF
+  comenzar
+    derecha
+    mientras ((HayPapelEnLaBolsa) & (HayFlorEnLaBolsa) & (PosAv < 100))
+      depositarFlor
+      depositarPapel
+      mover
+    si ((HayPapelEnLaBolsa) & (HayFlorEnLaBolsa))
+      depositarFlor
+      depositarPapel
+  fin
+  
+  proceso recorrerPapeles
+  comenzar
+    derecha
+    mientras ((HayPapelEnLaBolsa) & (PosAv < 100))
+      depositarPapel
+      mover
+    si (HayPapelEnLaBolsa)
+      depositarPapel
+  fin
+  
+ 
+  
+areas
+  areasR : AreaPC (2, 2, 16, 16)
+  calles : AreaPC (1, 20, 100, 22)
+  areaF : AreaP (1, 1, 1, 1)
+  
+robots
+  robot florero
+  variables
+    id, calle : numero
+  comenzar
+    RecibirMensaje (id, f1)
+    repetir 6
+      limpiarFlores
+      mover
+    repetir 2
+      limpiarFlores
+      mover
+    limpiarFlores
+    BloquearEsquina (PosAv + 1, PosCa)
+    mover
+    limpiarFlores
+    mover
+    LiberarEsquina (PosAv - 1, PosCa)
+    repetir 2
+      limpiarFlores
+      mover
+    derecha
+    repetir 2
+      limpiarFlores
+      mover
+    limpiarFlores
+
+    
+      
+    EnviarMensaje (id, f1)
+    RecibirMensaje (calle, f1)
+    Pos (1, calle)
+    recorrerFlores
+     
+ fin
+  robot papeleroFlorero
+  variables
+   id, calle : numero
+  comenzar
+    RecibirMensaje (id, f1)
+    repetir 4
+      repetir 10
+        limpiarPapelesYFlores
+        mover
+      derecha
+    EnviarMensaje (id, f1)
+    RecibirMensaje (calle, f1)
+    Pos (1, calle)
+    recorrerPF
+    
+     
+  fin
+ 
+  robot papelero
+  variables
+   id, calle : numero
+ comenzar
+    RecibirMensaje (id, f1)
+    repetir 4
+      repetir 7
+        limpiarPapeles
+        mover
+      derecha
+    EnviarMensaje (id, f1)
+    RecibirMensaje (calle, f1)
+    Pos (1, calle)
+    recorrerPapeles
+     
+  fin
+
+  robot fiscalizador
+  variables
+    id, calle : numero
+  comenzar
+    calle := 20
+    EnviarMensaje (1, r1)
+    EnviarMensaje (2, r2)
+    EnviarMensaje (3, r3)
+    repetir 3
+      RecibirMensaje (id, *)
+      si (id = 1)
+        EnviarMensaje (calle, r1)
+      sino
+        si (id = 2)
+          EnviarMensaje (calle, r2)
+        sino
+          EnviarMensaje (calle, r3)
+      calle := calle + 1
+  
+  fin
+  
+
+variables
+  r1 : florero
+  r2: papeleroFlorero
+  r3: papelero
+  f1: fiscalizador
+ 
+comenzar
+  AsignarArea (r1, areaR1)
+  AsignarArea (r2, areaR2)
+  AsignarArea (r3, areaR3)
+  AsignarArea (f1, areaF)
+  AsignarArea (r1, calles)
+  AsignarArea (r2, calles)
+  AsignarArea (r3, calles)
+  Iniciar (r1, 2, 2)
+  Iniciar (r2, 5, 5)
+  Iniciar (r3, 9, 9)
+  Iniciar (f1, 1, 1)
+  
+  
+
+
+
+fin
+ 
+ 
+
+
+

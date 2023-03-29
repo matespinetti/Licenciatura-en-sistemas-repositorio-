@@ -1,0 +1,4 @@
+numero: 45, apellido: spinetti, nombre: mateo, edad: 19, dni: 43534
+numero: 90, apellido: wagner, nombre: luciano, edad: 24, dni: 4234453
+numero: 73, apellido: ramos, nombre: matias, edad: 15, dni: 432432
+numero: 130, apellido: colli, nombre: dante, edad: 19, dni: 4545432

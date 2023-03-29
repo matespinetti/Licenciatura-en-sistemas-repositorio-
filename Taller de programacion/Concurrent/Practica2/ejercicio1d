@@ -1,0 +1,82 @@
+programa ejercicio1b
+procesos
+  proceso limpiarEsquinaFlores (ES cantFlores: numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1
+  fin
+  proceso recorrer (ES cantFlores: numero)
+  comenzar
+    limpiarEsquinaFlores (cantFlores)
+    repetir 9
+      mover
+      limpiarEsquinaFlores (cantFlores)
+  fin
+areas
+  area1: AreaP (1, 1, 1, 10)
+  area2: AreaP (2, 11, 2, 20)
+  area3: AreaP (3, 21, 3, 30)
+  area4: AreaP (4, 31, 4, 40)
+  area5: AreaP (5, 41, 5, 50)
+  area6: AreaP (6, 51, 6, 60)
+  areaF: AreaP (2,1,2,1)
+robots
+  robot florero
+  variables
+    cantFlores, posAvenida: numero
+  comenzar
+    cantFlores := 0
+    recorrer (cantFlores)
+    posAvenida := PosAv
+    EnviarMensaje (posAvenida, f1)
+    EnviarMensaje (cantFlores, f1)
+  fin
+  robot fiscalizador
+  variables
+    cant, max, codRobot, maxCodRobot: numero
+  comenzar
+    max := -1
+    repetir 6
+      RecibirMensaje (codRobot, *)
+      si (codRobot = 1)
+        RecibirMensaje (cant, r1)
+      sino 
+        si (codRobot = 2)
+          RecibirMensaje (cant, r2)
+        sino 
+          si (codRobot = 3)
+            RecibirMensaje (cant, r3)
+          sino 
+            si (codRobot = 4)
+              RecibirMensaje (cant, r4)
+            sino 
+              si (codRobot = 5)
+                RecibirMensaje (cant, r5)
+              sino
+                RecibirMensaje (cant, r6)   
+      si (cant >= max)
+        max := cant
+        maxCodRobot := codRobot
+    Informar (max)
+    Informar (maxCodRobot)  
+  fin
+variables
+  r1, r2, r3, r4, r5, r6: florero
+  f1: fiscalizador
+comenzar
+  AsignarArea(r1, area1)
+  AsignarArea (r2, area2)
+  AsignarArea (r3, area3)
+  AsignarArea (r4, area4)
+  AsignarArea (r5, area5)
+  AsignarArea (r6, area6)
+  AsignarArea (f1, areaF)
+  Iniciar (r1, 1, 1)
+  Iniciar (r2, 2, 11)
+  Iniciar (r3, 3, 21)
+  Iniciar (r4, 4, 31)
+  Iniciar (r5, 5, 41)
+  Iniciar (r6, 6, 51)
+  Iniciar (f1, 2, 1)  
+fin 

@@ -1,0 +1,69 @@
+programa ejercicio2
+procesos
+  proceso limpiarEsquina (ES cantFlores: numero; ES cantPapeles: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1
+  fin 
+  proceso escalon (ES cantFlores: numero; ES cantPapeles: numero )
+  variables
+    cantFlores, cantPapeles, alto: numero
+  comenzar
+    cantFlores := 0
+    cantPapeles := 0
+    Random (alto, 1, 5)
+    repetir alto
+      limpiarEsquina (cantFlores, cantPapeles)
+      mover
+    limpiarEsquina (cantFlores, cantPapeles)
+    derecha
+    mover
+    repetir 3
+      derecha
+  fin
+  
+areas
+  ciudad: AreaC(1, 1, 100, 100)
+
+robots
+  robot escalonero
+  variables
+    cantFlores, cantPapeles, cantSuperan: numero
+  comenzar
+    cantSuperan := 0
+    repetir 4
+      escalon (cantFlores, cantPapeles)
+      si (cantFlores > cantPapeles)
+        cantSuperan := cantSuperan + 1
+    
+    EnviarMensaje (cantSuperan, f1)
+  
+  fin
+  
+  robot fiscalizador
+  variables
+    cant, total : numero
+  comenzar
+    total := 0
+    repetir 3
+      RecibirMensaje (cant, *)
+      total := total + cant
+    Informar (total)
+  fin
+variables
+  r1, r2, r3: escalonero
+  f1: fiscalizador
+comenzar
+  AsignarArea (r1, ciudad)
+  AsignarArea (r2, ciudad)
+  AsignarArea (r3, ciudad)
+  AsignarArea (f1, ciudad)
+  Iniciar (f1, 1, 1)
+  Iniciar (r1, 2, 1 )
+  Iniciar (r2, 7, 1)
+  Iniciar (r3, 12, 1)
+fin

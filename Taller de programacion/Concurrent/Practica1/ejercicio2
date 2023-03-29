@@ -1,0 +1,75 @@
+programa Ejercicio-1
+procesos
+  proceso analizarEsquina (ES cantPapeles: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+  
+  fin
+  
+  proceso recorrer
+  variables
+    cantPapeles: numero
+    
+  comenzar
+    analizarEsquina (cantPapeles)
+    repetir 19
+      mover
+      analizarEsquina (cantPapeles)
+    
+    Informar ('Papeles', cantPapeles )
+  
+  
+  fin 
+ 
+ 
+areas
+  areaR1 : AreaP(10,10,10,29)
+  areaR2: AreaP(10,30, 29, 30)
+  areaR3: AreaP (30, 11, 30, 30)
+  areaR4: AreaP (11, 10, 30, 10)
+ 
+  
+robots 
+  robot avenida1
+  comenzar
+    recorrer     
+  fin
+  
+  robot calle1
+  comenzar
+    derecha
+    recorrer
+  fin
+  
+  robot avenida2
+  comenzar
+    repetir 2
+      derecha
+    recorrer
+  fin
+  
+  robot calle2
+  comenzar
+    repetir 3
+      derecha
+    recorrer
+  fin
+    
+
+variables 
+  r1: avenida1
+  r2: calle1
+  r3: avenida2
+  r4: calle2
+comenzar 
+  AsignarArea(r1, areaR1)
+  AsignarArea(r2, areaR2)
+  AsignarArea(r3, areaR3)
+  AsignarArea(r4, areaR4)
+  Iniciar(r1, 10, 10)
+  Iniciar(r2,10, 30)
+  Iniciar (r3, 30, 30)
+  Iniciar (r4, 30, 10)
+fin

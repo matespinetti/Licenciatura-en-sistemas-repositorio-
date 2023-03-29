@@ -1,0 +1,124 @@
+programa parcial2018
+procesos
+  proceso limpiarFlores (ES cantFlores: numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1
+     
+  fin
+  
+  proceso vaciarFlores (ES cantFlores : numero)
+  comenzar
+    mientras (cantFlores > 0)
+      depositarFlor
+      cantFlores := cantFlores - 1
+  
+  fin
+areas
+  areaE1: AreaPC (1, 10, 100, 25)
+  areaE2: AreaPC (1, 30, 100, 45)
+  areaF : AreaP (1, 1, 1, 1)
+  
+ 
+robots
+  robot fiscalizador
+  variables
+    ancho, avenida: numero
+  comenzar
+    EnviarMensaje (1, e1R1)
+    EnviarMensaje (2, e1R2)
+    EnviarMensaje (1, e2R1)
+    EnviarMensaje (2, e2R2)
+    Random (ancho, 1, 5)
+    Random (avenida, 1, 95)
+    EnviarMensaje (ancho, e1R1)
+    EnviarMensaje (avenida, e1R1)
+    EnviarMensaje (ancho, e2R1)
+    EnviarMensaje (avenida, e2R1)
+  fin
+  
+  robot equipo1
+  variables
+    id, ancho, avenida, cantFlores, puedo: numero
+  comenzar
+    cantFlores := 0
+    RecibirMensaje (id, f1)
+    si (id = 1)
+      RecibirMensaje (ancho, f1)
+      RecibirMensaje (avenida, f1)
+      Pos (avenida, 10)
+      repetir 2
+        repetir 15
+          limpiarFlores (cantFlores)
+          mover
+        derecha
+        repetir ancho
+          limpiarFlores (cantFlores)
+          mover
+        derecha
+      Pos (5, 15)
+      vaciarFlores
+      Pos (1, 1)
+      EnviarMensaje (V, e1R2)
+    sino
+      RecibirMensaje (puedo, e1R1)
+      Pos (5, 15)
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+      Pos (1, 10)
+      repetir 2
+        repetir 14
+          si (HayFlorEnLaBolsa)
+            depositarFlor
+          mover
+        derecha
+        repetir 99
+          si (HayFlorEnLaBolsa)
+            depositarFlor
+          mover
+        derecha
+      Pos (2, 2)
+  fin
+  robot equipo1
+  variables
+    id, ancho, avenida, cantFlores, puedo: numero
+  comenzar
+    cantFlores := 0
+    RecibirMensaje (id, f1)
+    si (id = 1)
+      RecibirMensaje (ancho, f1)
+      RecibirMensaje (avenida, f1)
+      Pos (avenida, 10)
+      repetir 2
+        repetir 15
+          limpiarFlores (cantFlores)
+          mover
+        derecha
+        repetir ancho
+          limpiarFlores (cantFlores)
+          mover
+        derecha
+      Pos (5, 15)
+      vaciarFlores
+      Pos (1, 1)
+      EnviarMensaje (V, e1R2)
+    sino
+      RecibirMensaje (puedo, e1R1)
+      Pos (5, 15)
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+      Pos (1, 10)
+      repetir 2
+        repetir 14
+          si (HayFlorEnLaBolsa)
+            depositarFlor
+          mover
+        derecha
+        repetir 99
+          si (HayFlorEnLaBolsa)
+            depositarFlor
+          mover
+        derecha
+      Pos (2, 2)
+  fin

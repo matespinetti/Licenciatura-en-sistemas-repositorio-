@@ -1,0 +1,115 @@
+programa ejercicio4
+procesos
+  proceso limpiarPapeles
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso limpiarFlores
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  
+  proceso vaciarBolsa
+  comenzar
+    mientras (HayPapelEnLaBolsa)
+      depositarPapel
+    mientras (HayFlorEnLaEsquina)
+      depositarFlor
+  
+  fin
+areas
+  areaJ : AreaP (1, 1, 1, 1)
+  cuadrante : AreaPC (2, 2, 100, 100)
+  areaT1 : AreaP (2, 1, 2, 1)
+  areaT2: AreaP (3, 1, 3, 1)
+  
+robots
+  robot trabajador
+  variables
+    tarea, av, ca, avAnt, caAnt: numero
+  comenzar
+    RecibirMensaje (tarea, j1)
+    avAnt := -1
+    mientras (tarea <> 4)
+      RecibirMensaje (av, j1)
+      RecibirMensaje (ca, j1)
+      BloquearEsquina (av, ca)
+      
+      Pos (av, ca)
+      si (AvAnt <> -1)
+        LiberarEsquina (avAnt, caAnt)
+
+      si (tarea = 1)
+        limpiarFlores
+      sino
+        si (tarea = 2)
+          limpiarPapeles
+        sino
+          vaciarBolsa
+      avAnt := PosAv
+      caAnt := PosCa
+      EnviarMensaje (V, j1)
+      RecibirMensaje (tarea, j1)
+  fin
+  
+  robot jefe
+  variables
+    tarea, id, ca, av, cont: numero
+    completado, sigue1, sigue2 : boolean
+  comenzar
+    cont := 0
+    sigue1 := V
+    sigue2 := V
+    mientras ((cont < 10) & ((sigue1) | (sigue2)))
+      Random (tarea, 1, 4)
+      Random (id, 1, 2)
+      Informar (id)
+      Informar (tarea)
+      Random (av, 2, 100)
+      Random (ca, 2, 100)
+      si (id = 1)
+        si (sigue1) 
+          si (tarea = 4)
+            sigue1 := F 
+          EnviarMensaje (tarea, t1)
+          si (tarea <> 4) 
+            EnviarMensaje (av, t1)
+            EnviarMensaje (ca, t1)
+            RecibirMensaje (completado, t1)
+      sino
+        si (sigue2)
+          
+          si (tarea = 4)
+            sigue2 := F
+          EnviarMensaje (tarea, t2)
+          si (tarea <> 4) 
+            EnviarMensaje (av, t2)
+            EnviarMensaje (ca, t2)
+            RecibirMensaje (completado, t2)
+      cont := cont + 1 
+      
+      
+    si (sigue1)
+      EnviarMensaje (4, t1 )
+    si (sigue2)
+      EnviarMensaje (4, t2)
+  fin
+
+variables
+  t1, t2 : trabajador
+  j1: jefe
+  
+comenzar
+  AsignarArea (t1, areaT1)
+  AsignarArea (t2, areaT2)
+  AsignarArea (j1, areaJ)
+  AsignarArea (t1, cuadrante)
+  AsignarArea (t2, cuadrante)
+  Iniciar (t1, 2, 1)
+  Iniciar (t2, 3, 1)
+  Iniciar (j1, 1, 1)
+
+
+fin

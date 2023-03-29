@@ -1,0 +1,81 @@
+programa ejercicio3
+procesos
+  proceso izquierda
+  comenzar
+    repetir 3
+      derecha
+  fin
+  
+  proceso contarFloresYPapeles (ES cantFlores: numero; ES cantPapeles: numero)
+  variables
+    auxP, auxF: numero
+  comenzar
+    auxP := 0
+    auxF := 0
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      auxF := auxF + 1
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      auxP := auxP + 1
+    repetir auxF
+      depositarFlor
+    repetir auxP
+      depositarPapel
+    cantFlores := cantFlores + auxF
+    cantPapeles := cantPapeles + auxP
+  fin
+  proceso escalon (ES cantSupero: numero)
+  variables
+    n, cantF, cantP: numero
+  comenzar
+    n := 1
+    repetir 4
+      cantF := 0
+      cantP := 0
+      repetir n
+        contarFloresYPapeles (cantF, cantP)
+        mover
+      derecha
+      repetir n
+        contarFloresYPapeles (cantF, cantP)
+        mover
+      si ((cantF + 1) = cantP)
+        cantSupero := cantSupero + 1    
+      n := n + 1
+      izquierda
+  fin
+
+areas
+  ciudad: AreaC (1, 1, 100, 100)
+
+robots
+  robot escalonador
+  variables
+    cantSupero: numero
+  comenzar
+    cantSupero := 0
+    escalon (cantSupero)
+    Informar ('Cantidad', cantSupero)
+  fin
+  
+variables
+  r1, r2, r3: escalonador
+
+comenzar
+  AsignarArea (r1, ciudad)
+  AsignarArea (r2, ciudad)
+  AsignarArea (r3, ciudad)
+  Iniciar (r1, 12, 14)
+  Iniciar (r2, 17, 10)
+  Iniciar (r3, 22, 6)
+  
+  
+
+
+
+
+fin
+   
+  
+  

@@ -1,0 +1,108 @@
+programa ejercicio1
+procesos
+  proceso limpiarFlores
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+  
+  fin
+areas
+  areaS: AreaP (100, 100, 100, 100)
+  areaC1: AreaPC (1, 1, 1, 100)
+  areaC2: AreaPC (2, 1, 2, 100)
+  areaC3: AreaPC (3, 1, 3, 100)
+  
+
+robots
+  robot cliente
+  variables
+    id, cantFlores, av, ca: numero
+    ack, noDeposite : boolean
+  comenzar
+    id := PosAv
+    av := PosAv
+    noDeposite := V
+    mientras (PosCa < 100)
+      Random (cantFlores, 1, 4)
+      EnviarMensaje (id, s1)
+      EnviarMensaje (cantFlores, s1)
+      EnviarMensaje (av, s1)
+      ca := PosCa + 1
+      EnviarMensaje (ca, s1)
+      RecibirMensaje (ack, s1)
+      Pos (av, ca)
+      limpiarFlores
+      Pos (av, ca - 1)
+      
+      repetir cantFlores
+        si (PosCa < 100)        
+          depositarFlor
+          mover
+        sino
+          si (noDeposite)
+            depositarFlor
+            noDeposite := F
+    EnviarMensaje (id, s1)
+    EnviarMensaje (0, s1)
+  fin
+  robot servidor
+  variables
+    id, cantFlores, av, ca, terminados: numero         
+  comenzar
+    terminados := 0
+    mientras (terminados < 3)
+      RecibirMensaje (id, *)
+      si (id = 1)
+        RecibirMensaje (cantFlores, c1)
+      sino
+        si (id = 2)
+          RecibirMensaje (cantFlores, c2)
+        sino
+          RecibirMensaje (cantFlores, c3)
+      si (cantFlores <> 0)
+        si (id = 1)
+          RecibirMensaje (av, c1)
+          RecibirMensaje (ca, c1)
+        sino
+          si (id = 2)
+            RecibirMensaje (av, c2)
+            RecibirMensaje (ca, c2)
+          sino
+            RecibirMensaje (av, c3)
+            RecibirMensaje (ca, c3)
+        Pos (av, ca)
+        repetir (cantFlores)
+          depositarFlor
+        Pos (100, 100)
+        si (id = 1)
+          EnviarMensaje (V, c1)
+        sino
+          si (id = 2)
+            EnviarMensaje (V, c2)
+          sino
+            EnviarMensaje (V, c3)
+      sino
+        terminados:= terminados + 1
+  
+  
+  fin          
+      
+variables
+  c1, c2, c3: cliente
+  s1: servidor
+ 
+comenzar
+  AsignarArea (c1, areaC1)
+  AsignarArea (c2, areaC2)
+  AsignarArea (c3, areaC3)
+  AsignarArea (s1, areaS)
+  AsignarArea (s1, areaC1)
+  AsignarArea (s1, areaC2)
+  AsignarArea (s1, areaC3)
+  Iniciar (c1, 1, 1)
+  Iniciar (c2, 2, 1)
+  Iniciar (c3, 3, 1)
+  Iniciar (s1, 100, 100)
+
+fin
+  

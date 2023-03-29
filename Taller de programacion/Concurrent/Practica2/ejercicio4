@@ -1,0 +1,152 @@
+programa ejercicio4
+procesos 
+  proceso limpiarEsquina (ES cantFlores: numero; ES cantPapeles: numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores := cantFlores + 1
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1  
+  fin
+  
+areas
+  cuadrante : AreaPC (25, 25, 75, 75)
+  areaF : AreaP (1, 1, 1, 1)
+  areaR1 : AreaP (25, 1, 25, 1)
+  areaR2 : AreaP (30, 1, 30, 1)
+  areaR3 : AreaP (35, 1, 35, 1)
+  areaR4 : AreaP (40, 1, 40 ,1 )
+  
+robots
+  robot recolector
+  variables
+    habilitado, ganador : boolean
+    cantFlores, cantPapeles, cantTotal, identificador, avenida, calle : numero
+  comenzar
+    RecibirMensaje (identificador, f1)
+    habilitado := V
+    
+    cantTotal := 0
+    mientras (habilitado)
+      RecibirMensaje (habilitado, f1)
+      si (habilitado)
+        cantFlores := 0
+        cantPapeles := 0
+        Random (avenida, 25, 75)
+        Random (calle, 25, 75)
+        Pos (40, 40)
+        limpiarEsquina (cantPapeles, cantFlores)
+        cantTotal := cantTotal + cantFlores + cantPapeles
+        si (identificador = 1)
+          Pos (25, 1)
+        sino
+          si (identificador = 2)
+            Pos (30, 1)
+          sino
+            si (identificador = 3)
+              Pos (35, 1)
+            sino
+              Pos (40, 1)
+    
+    EnviarMensaje (identificador, f1)
+    EnviarMensaje (cantTotal, f1)
+    
+    RecibirMensaje (ganador, f1)
+    si (ganador)
+      Pos (50, 50)
+  
+  fin
+  
+  robot fiscalizador
+  variables
+    maxCant, maxId, cant, id, num: numero
+  comenzar
+    EnviarMensaje (1, r1)
+    EnviarMensaje (2, r2)
+    EnviarMensaje (3, r3)
+    EnviarMensaje (4, r4)
+    repetir 10
+      Random (num, 1, 1)
+      si (num = 1)
+        EnviarMensaje (V, r1)
+      sino
+        si (num = 2)
+          EnviarMensaje (V, r2)
+        sino
+          si (num = 3)
+            EnviarMensaje (V, r3)
+          sino
+            EnviarMensaje (V, r4)
+    EnviarMensaje (F, r1)
+    EnviarMensaje (F, r2)
+    EnviarMensaje (F, r3)
+    EnviarMensaje (F, r4)
+    maxCant := -1
+    repetir 4
+      RecibirMensaje (id, *)
+      Informar (id)
+      si (id = 1)
+        RecibirMensaje (cant, r1)
+      sino
+        si (id = 2)
+          RecibirMensaje (cant, r2)
+        sino
+          si (id = 3)
+            RecibirMensaje (cant, r3)
+          sino
+            RecibirMensaje (cant, r4)
+      Informar (cant)
+      si (cant > maxCant)
+        maxCant := cant
+        maxId := id  
+    si (maxId = 1)
+      EnviarMensaje (V, r1)
+      EnviarMensaje (F, r2)
+      EnviarMensaje (F, r3)
+      EnviarMensaje (F, r4)
+    sino
+      si (maxId = 2)
+        EnviarMensaje (F, r1) 
+        EnviarMensaje (V, r2) 
+        EnviarMensaje (F, r3) 
+        EnviarMensaje (F, r4) 
+      sino
+        si (maxId= 3) 
+          EnviarMensaje (F, r1) 
+          EnviarMensaje (F, r2) 
+          EnviarMensaje (V, r3) 
+          EnviarMensaje (F, r4) 
+        sino
+          EnviarMensaje (F, r1)
+          EnviarMensaje (F, r2)
+          EnviarMensaje (F, r3)
+          EnviarMensaje (V, r4)
+
+         
+  fin
+  
+variables
+  r1, r2, r3, r4: recolector
+  f1: fiscalizador
+ 
+comenzar
+  AsignarArea (f1, areaF)
+  AsignarArea (r1, areaR1)
+  AsignarArea (r2, areaR2)
+  AsignarArea (r3, areaR3)
+  AsignarArea (r4, areaR4)
+  AsignarArea (r1, cuadrante)
+  AsignarArea (r2, cuadrante)
+  AsignarArea (r3, cuadrante)
+  AsignarArea (r4, cuadrante)
+  Iniciar (r1, 25, 1)
+  Iniciar (r2, 30, 1)
+  Iniciar (r3, 35, 1)
+  Iniciar (r4, 40, 1)
+  Iniciar (f1, 1, 1)
+  
+
+
+fin
+    

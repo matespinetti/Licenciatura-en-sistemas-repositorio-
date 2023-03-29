@@ -1,0 +1,120 @@
+programa parcial2018
+procesos
+  proceso calcularMaximo (E v1: numero; E id1: numero; ES max: numero; ES maxId: numero)
+  comenzar
+    si (v1 >= max)
+      max := v1
+      maxId := id1
+  fin
+areas
+  cuadrante: AreaPC (45, 48, 62, 69)
+  areaR1: AreaP (10, 10, 10, 10)
+  areaR2: AreaP (11, 10, 11, 10)
+  areaR3: AreaP (12, 10, 12, 10)
+  areaR4: AreaP (13, 10, 13, 10)
+  areaF: AreaP (1, 1, 1, 1)
+robots
+  robot trabajador
+  variables
+    av, ca, avRet, id: numero
+    gane: boolean
+  comenzar
+    avRet := PosAv
+    RecibirMensaje (id, f1)
+    repetir 5
+      Random (av, 45, 45)
+      Random (ca, 48, 48)
+      BloquearEsquina (av, ca)
+      Pos (av, ca)
+          mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      EnviarMensaje (id, f1)
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      EnviarMensaje (id, f1)
+
+      Pos (avRet, 10)
+      LiberarEsquina (av, ca)
+    EnviarMensaje (-1, f1)
+    RecibirMensaje (gane, f1)
+    si (gane)
+      mientras (HayPapelEnLaBolsa)
+        depositarPapel
+      mientras (HayFlorEnLaBolsa)
+        depositarFlor
+  fin
+  robot fiscalizador
+  variables
+    enEjecucion, id, cant1, cant2, cant3, cant4, max, maxId: numero
+  comenzar
+    EnviarMensaje (1, r1)
+    EnviarMensaje (2, r2)
+    EnviarMensaje (3, r3)
+    EnviarMensaje (4, r4)
+    enEjecucion := 4
+    cant1:= 0
+    cant2 := 0
+    cant3 := 0
+    cant4 := 0
+    max := -1  
+    mientras (enEjecucion > 0)
+      RecibirMensaje (id, *)
+      si (id = -1)
+        enEjecucion := enEjecucion - 1
+      sino
+        si (id = 1)
+          cant1 := cant1 + 1
+        sino
+          si (id = 2)
+            cant2 := cant2 + 1
+          sino
+            si (id = 3)
+              cant3 := cant3 + 1
+            sino
+              cant4 := cant4 + 1
+    calcularMaximo (cant1, 1, max, maxId)
+    calcularMaximo (cant2, 2, max, maxId)
+    calcularMaximo (cant3, 3, max, maxId)
+    calcularMaximo (cant4, 4, max, maxId)
+    si (maxId = 1)
+      EnviarMensaje (V, r1)
+      EnviarMensaje (F, r2)
+      EnviarMensaje (F, r3)
+      EnviarMensaje (F, r4)
+    sino
+      si (maxId = 2)
+        EnviarMensaje (F, r1)
+        EnviarMensaje (V, r2)
+        EnviarMensaje (F, r3)
+        EnviarMensaje (F, r4)
+      sino
+        si (maxId = 3)
+          EnviarMensaje (F, r1)
+          EnviarMensaje (F, r2)
+          EnviarMensaje (V, r3)
+          EnviarMensaje (F, r4)
+        sino
+          EnviarMensaje (F, r1)
+          EnviarMensaje (F, r2)
+          EnviarMensaje (F, r3)
+          EnviarMensaje (V, r4)     
+  fin      
+variables
+  r1, r2, r3, r4: trabajador
+  f1: fiscalizador 
+comenzar
+  AsignarArea(r1, areaR1)
+  AsignarArea(r2, areaR2)
+  AsignarArea(r3, areaR3)
+  AsignarArea(r4, areaR4)
+  AsignarArea(r1, cuadrante)
+  AsignarArea(r2, cuadrante)
+  AsignarArea(r3, cuadrante)
+  AsignarArea(r4, cuadrante)
+  AsignarArea (f1, areaF)
+  Iniciar (r1, 10, 10)
+  Iniciar (r2, 11, 10)
+  Iniciar (r3, 12, 10)
+  Iniciar (r4, 13, 10)
+  Iniciar (f1, 1, 1)
+fin

@@ -1,0 +1,51 @@
+programa Ejercicio-1
+procesos
+  proceso analizarEsquina (ES cantSinFlor:numero; ES cantFlores:numero)
+  comenzar
+    si ~(HayFlorEnLaEsquina)
+      cantSinFlor := cantSinFlor + 1
+    sino
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+        cantFlores := cantFlores + 1
+  fin
+  
+  proceso recorrerAvenida
+  variables
+    cantSinFlor, cantFlores: numero
+    
+  comenzar
+    cantSinFlor := 0
+    cantFlores := 0
+    analizarEsquina(cantSinFlor, cantFlores)
+    repetir 99
+      mover
+      analizarEsquina(cantSinFlor, cantFlores)
+    
+    repetir cantFlores
+      depositarFlor
+    
+    Informar ('flores', cantFlores)
+    Informar ('sinFlor', cantSinFlor)
+  fin
+areas
+  ciudad : AreaC(1,1,100,100)
+robots 
+  robot contador 
+  comenzar
+    recorrerAvenida
+        
+  fin
+
+variables 
+  robot1: contador
+  robot2: contador
+  robot3: contador
+comenzar 
+  AsignarArea(robot1,ciudad)
+  AsignarArea(robot2,ciudad)
+  AsignarArea(robot3,ciudad)
+  Iniciar(robot1, 1, 1)
+  Iniciar(robot2, 3, 1)
+  Iniciar(robot3, 5, 1)
+fin

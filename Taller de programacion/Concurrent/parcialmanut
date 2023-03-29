@@ -1,0 +1,80 @@
+programa parcialManut
+procesos
+  proceso actuarEsquina (ES cantPapeles: numero)
+  comenzar
+    si (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+      si (HayFlorEnLaBolsa)
+        depositarFlor
+  
+  fin
+areas
+  areaR1: AreaP (1, 1, 1, 100)
+  areaR2: AreaP (2, 1, 2, 100)
+  areaR3: AreaP (3, 1, 3, 100)
+  areaF : AreaP (100, 100, 100, 100)
+  esquina80: AreaP (80, 80, 80, 80)
+robots
+  robot trabajador
+  variables
+    av, cantPapeles: numero
+    habilitado: boolean
+  comenzar
+    cantPapeles := 0
+    av := PosAv
+    repetir 11
+      RecibirMensaje (habilitado, f1)
+      actuarEsquina (cantPapeles)
+      repetir 9 
+        mover
+        actuarEsquina (cantPapeles)
+      EnviarMensaje (V, f1)
+    RecibirMensaje (habilitado, f1)
+    repetir cantPapeles
+      BloquearEsquina (80, 80)
+      Pos (80, 80)
+      depositarPapel
+      Pos (av, 100)
+      LiberarEsquina (80, 80)
+    EnviarMensaje (V, f1)
+  fin
+  robot fiscalizador
+  variables
+    aux: boolean
+    cantFlores: numero
+  comenzar
+    repetir 11
+      EnviarMensaje (V, r1)
+      EnviarMensaje (V, r2)
+      EnviarMensaje (V, r3)
+      repetir 3
+        RecibirMensaje (aux, *)
+    EnviarMensaje (V, r1)
+    EnviarMensaje (V, r2)
+    EnviarMensaje (V, r3)
+    repetir 3
+      RecibirMensaje (aux, *)
+    Pos (80, 80)
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantFlores := cantFlores + 1
+    Informar (cantFlores)
+  fin 
+variables
+  r1, r2, r3: trabajador
+  f1: fiscalizador  
+comenzar
+  AsignarArea (r1, areaR1)
+  AsignarArea (r2, areaR2)
+  AsignarArea (r3, areaR3)
+  AsignarArea (f1, areaF)
+  AsignarArea (r1, esquina80)
+  AsignarArea (r2, esquina80)
+  AsignarArea (r3, esquina80)
+  AsignarArea (f1, esquina80)
+  Iniciar (r1, 1, 1)
+  Iniciar (r2, 2, 1)
+  Iniciar (r3, 3, 1)
+  Iniciar (f1, 100, 100)
+fin

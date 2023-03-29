@@ -1,0 +1,99 @@
+programa ejercicio2
+procesos
+  proceso limpiarPapeles (ES cantPapeles: numero )
+  variables
+    av, ca: numero
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      cantPapeles := cantPapeles + 1
+      si (cantPapeles = 5)
+        av := PosAv
+        ca: PosCa
+        BloquearEsquina (50, 50)
+        Pos (50, 50)
+        repetir 5
+          depositarPapel
+        Pos (av, ca)
+        LiberarEsquina (50, 50)
+        cantPapeles := 0
+  fin
+  
+  proceso intento (ES intentosF: numero)
+  variables
+    avRet, papeles, tomados: numero
+  comenzar
+    avRet := PosAv
+    Random (papeles, 2, 5)
+    tomados:= 0
+    BloquearEsquina (50, 50)
+    Pos (50, 50)
+    repetir papeles
+      si (HayPapelEnLaEsquina)
+        tomarPapel
+        tomados:= tomados + 1
+    si (tomados < papeles)
+      repetir tomados
+        depositarPapel
+      tomados := 0
+      IntentosF := IntentosF + 1
+    sino
+      IntentosF := 0
+    Pos (avRet, 1)
+    LiberarEsquina (50, 50)
+    repetir tomados
+      depositarPapel
+    
+  
+  fin
+areas
+  areaP1: AreaP (5, 1, 5, 100)
+  areaP2: AreaP (10, 1, 10, 100)
+  esquina50 : AreaPC (50, 50, 50, 50)
+  areaC1: AreaP (11, 1, 11, 1)
+  areaC2: AreaP (12, 1, 12, 1)
+
+robots
+  robot productor
+  variables
+    cantPapeles: numero
+  comenzar
+    cantPapeles := 0
+    repetir 99
+      limpiarPapeles (cantPapeles)
+      mover
+    limpiarPapeles (cantPapeles)
+   
+  fin
+  
+  robot consumidor
+  variables
+    intentosF: numero
+  comenzar
+    intentosF := 0
+    mientras (intentosF < 8)
+      intento (intentosF)      
+  fin
+  
+  
+variables
+  p1, p2: productor
+  c1, c2: consumidor
+  
+
+comenzar
+  AsignarArea (p1, areaP1)
+  AsignarArea (p2, areaP2)
+  AsignarArea (c1, areaC1)
+  AsignarArea (c2, areaC2)
+  AsignarArea (p1, esquina50)
+  AsignarArea (p2, esquina50)
+  AsignarArea (c1, esquina50)
+  AsignarArea (c2, esquina50)
+  Iniciar (p1, 5, 1)
+  Iniciar (p2, 10, 1)
+  Iniciar (c1, 11, 1)
+  Iniciar (c2, 12, 1)
+
+
+fin
