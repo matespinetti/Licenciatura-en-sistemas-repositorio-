@@ -88,7 +88,7 @@ and how to successfully get involved."""
 dividedText = text.split("\n");
 
 for x in dividedText:
-    if "http" in x:
+    if "http" or "https "in x:
         print (x)
 
 

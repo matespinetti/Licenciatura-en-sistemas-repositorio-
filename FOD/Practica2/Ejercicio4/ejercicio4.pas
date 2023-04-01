@@ -39,7 +39,7 @@ procedure minimo (var vectorD: vectorDetalles; var vectorR: vectorRegistros ; va
 var
 	i, minIndice : integer;
 begin
-	min.codigo := 32000;
+	min.codigo := 32100;
 	min.fecha.dia := 32000;
 	min.fecha.mes := 32000 ;
 	min.fecha.ano := 32000;
@@ -95,6 +95,7 @@ begin
 	
 	while (min.codigo <> VALORALTO) do
 		begin
+			writeln (min.codigo);
 			actual := min;
 			actual.tiempoSesion := 0;
 			
@@ -104,7 +105,7 @@ begin
 						minimo (vectorD, vectorR, min)
 				
 				end;
-				
+			
 			write (archM, actual);
 		
 				
