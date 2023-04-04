@@ -29,53 +29,57 @@ begin
 	if (not eof(archD)) then
 		read (archD, regD)
 	else
-		regD.codigo := 32000;
+		regD.codigo := VALORALTO;
 
 
 end;
 
+
+
+function esMenor(fecha1: usuario; fecha2: usuario): boolean;
+begin
+  if fecha1.fecha.ano< fecha2.fecha.ano then
+    esMenor := true
+  else if fecha1.fecha.ano > fecha2.fecha.ano then
+    esMenor := false
+  else 
+    if fecha1.fecha.mes < fecha2.fecha.mes then
+      esMenor := true
+    else if fecha1.fecha.mes > fecha2.fecha.mes then
+      esMenor := false
+    else 
+      if fecha1.fecha.dia < fecha2.fecha.dia then
+        esMenor := true
+      else
+        esMenor := false;
+end;
 
 procedure minimo (var vectorD: vectorDetalles; var vectorR: vectorRegistros ; var min: usuario);
 var
 	i, minIndice : integer;
 begin
-	min.codigo := 32100;
+	min.codigo := 32000;
 	min.fecha.dia := 32000;
-	min.fecha.mes := 32000 ;
+	min.fecha.mes := 32000;
 	min.fecha.ano := 32000;
 	for i := 1 to 5 do
 		begin
-			if (vectorR[i].codigo < min.Codigo) then
+			if ((vectorR[i].codigo <= min.Codigo)and (esMenor(vectorR[i], min)))then
 				begin
-					if (vectorR[i].fecha.dia < min.fecha.dia ) then
-						begin
-							if (vectorR[i].fecha.mes < min.fecha.mes) then
-								begin
-									if (vectorR[i].fecha.ano < min.fecha.ano) then
-										begin
-											minIndice := i;
-											min := vectorR[i];
-										
-										
-										end;
-								
-								end;
-						
-						
-						end;
-				
+					minIndice := i;
+					min := vectorR[i];
 				
 				end;
 		
-		end;
-		
 		leer (vectorD[minIndice], vectorR[minIndice]);
+		
+		end;
 		
 	
 
-
-
 end;
+
+
 procedure procesar (var vectorD: vectorDetalles; var vectorR: vectorRegistros; var archM: maestro);
 var
 	i: integer;
@@ -95,14 +99,17 @@ begin
 	
 	while (min.codigo <> VALORALTO) do
 		begin
-			writeln (min.codigo);
+			
 			actual := min;
 			actual.tiempoSesion := 0;
 			
-			while ( (min.codigo <> VALORALTO) and(actual.codigo = min.codigo) and (actual.fecha.dia = min.fecha.dia) and (actual.fecha.mes = min.fecha.mes) and (actual.fecha.ano = min.fecha.ano)) do
+			while ( (actual.codigo = min.codigo) and (actual.fecha.dia = min.fecha.dia) and (actual.fecha.mes = min.fecha.mes) and (actual.fecha.ano = min.fecha.ano)) do
 				begin
+						
 						actual.tiempoSesion := actual.tiempoSesion + min.tiempoSesion;
-						minimo (vectorD, vectorR, min)
+						minimo (vectorD, vectorR, min);
+						writeln(min.codigo);
+
 				
 				end;
 			
@@ -179,6 +186,22 @@ begin
 end;
 
 
+
+procedure imprimirMaestro (var archM: maestro);
+var
+	u: usuario;
+begin
+	reset (archM);
+	while (not eof(archM)) do
+		begin
+			read (archM, u);
+			writeln ('Codigo: ', u.codigo, ', dia:  ',u.fecha.dia, ', mes: ', u.fecha.mes, ', ano: ', u.fecha.ano, ', tiempoTotal: ', u.tiempoSesion  );
+		end;
+
+
+end;
+
+
 var
 	archM: maestro;
 	vectorD: vectorDetalles;
@@ -192,8 +215,9 @@ begin
 	assign (vectorD [4], 'detalle4.dat');
 	assign (vectorD [5], 'detalle5.dat');
 	assign (archM, 'maestro.dat');
-	//crearDetalles (vectorD);
+	crearDetalles (vectorD);
 	procesar (vectorD, vectorR, archM);
+	imprimirMaestro(archM);
 	
 
 
