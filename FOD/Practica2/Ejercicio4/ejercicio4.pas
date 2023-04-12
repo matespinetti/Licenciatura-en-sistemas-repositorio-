@@ -27,9 +27,13 @@ type
 procedure leer (var archD: detalle; var regD: usuario);
 begin
 	if (not eof(archD)) then
-		read (archD, regD)
+		begin
+			read (archD, regD)
+		end
 	else
-		regD.codigo := VALORALTO;
+		begin
+			regD.codigo := VALORALTO;
+		end;
 
 
 end;
@@ -59,22 +63,36 @@ var
 	i, minIndice : integer;
 begin
 	min.codigo := 32000;
-	min.fecha.dia := 32000;
-	min.fecha.mes := 32000;
-	min.fecha.ano := 32000;
+	//min.fecha.dia := 32000;
+	//min.fecha.mes := 32000;
+	//min.fecha.ano := 32000;
 	for i := 1 to 5 do
 		begin
-			if ((vectorR[i].codigo <= min.Codigo)and (esMenor(vectorR[i], min)))then
+			writeln (i, ': ', vectorR[i].codigo, vectorR[i].fecha.dia, vectorR[i].fecha.mes, vectorR[i].fecha.ano);
+			if ((vectorR[i].codigo < min.Codigo))then
 				begin
+					min:= vectorR[i];
 					minIndice := i;
-					min := vectorR[i];
+
 				
-				end;
+				end
+			else if (vectorR[i].codigo = min.codigo) then
+					begin
+						if (esMenor(vectorR[i], min)) then
+							begin
+								min := vectorR[i];
+								minIndice := i;
+
+
+							end;
+
+					end;
 		
-		leer (vectorD[minIndice], vectorR[minIndice]);
+		
 		
 		end;
 		
+	leer(vectorD[minIndice], vectorR[minIndice]);
 	
 
 end;
@@ -108,10 +126,10 @@ begin
 						
 						actual.tiempoSesion := actual.tiempoSesion + min.tiempoSesion;
 						minimo (vectorD, vectorR, min);
-						writeln(min.codigo);
 
 				
 				end;
+			writeln (min.codigo);
 			
 			write (archM, actual);
 		
@@ -187,7 +205,7 @@ end;
 
 
 
-procedure imprimirMaestro (var archM: maestro);
+procedure imprimirMaestro (var archM: detalle);
 var
 	u: usuario;
 begin
@@ -197,6 +215,8 @@ begin
 			read (archM, u);
 			writeln ('Codigo: ', u.codigo, ', dia:  ',u.fecha.dia, ', mes: ', u.fecha.mes, ', ano: ', u.fecha.ano, ', tiempoTotal: ', u.tiempoSesion  );
 		end;
+	
+	close (archM);
 
 
 end;
@@ -215,9 +235,12 @@ begin
 	assign (vectorD [4], 'detalle4.dat');
 	assign (vectorD [5], 'detalle5.dat');
 	assign (archM, 'maestro.dat');
-	crearDetalles (vectorD);
+	//crearDetalles (vectorD);
+	imprimirMaestro (vectorD[1]);
+	imprimirMaestro (vectorD[2]);
 	procesar (vectorD, vectorR, archM);
 	imprimirMaestro(archM);
+	
 	
 
 
