@@ -16,17 +16,17 @@ def crearTodasNotas (l1, l2):
 
 def calcularPromedio (nombres, notas1, notas2):
     prom = {}
-    for i,nombre in zip(range(len(nombres)),nombres):
+    for i,nombre in zip(range(len(nombres)), nombres):
         prom[nombre] = (notas1[i] + notas2[i]) / 2
 
     return prom
 
 
-def promedioMasAlto (promedios) :
+def promedioMasAlto (promedios):
     return max(promedios, key= promedios.get)
 
 def promedioMasBajo (promedios) :
-    return min(promedios, key= promedios.get)
+    return min(promedios, key=promedios.get)
 
 
 

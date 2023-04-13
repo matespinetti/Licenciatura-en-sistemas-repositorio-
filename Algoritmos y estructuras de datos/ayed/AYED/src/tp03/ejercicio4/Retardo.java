@@ -24,8 +24,5 @@ public class Retardo {
 	public void setRetardoDer(int retardoDer) {
 		this.retardoDer = retardoDer;
 	}
-	
-	
-	
-	
+
 }

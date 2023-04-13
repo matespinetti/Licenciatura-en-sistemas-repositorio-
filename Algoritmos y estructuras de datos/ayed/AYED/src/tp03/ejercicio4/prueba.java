@@ -13,6 +13,7 @@ public class prueba {
 		arbol.getHijoIzquierdo().agregarHijoDerecho(new ArbolBinario<Retardo>(null));
 		arbol.getHijoDerecho().agregarHijoIzquierdo(new ArbolBinario<Retardo>(null));
 		arbol.getHijoDerecho().agregarHijoDerecho(new ArbolBinario<Retardo>(null));
+
 		
 		System.out.println(redB.retardoReenvio2(arbol)); 
 	}

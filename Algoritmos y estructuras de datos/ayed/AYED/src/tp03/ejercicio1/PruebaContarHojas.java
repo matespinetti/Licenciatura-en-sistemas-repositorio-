@@ -14,9 +14,6 @@ public class PruebaContarHojas {
 		System.out.println(a.contarHojas());
 		a = a.espejo();
 		a.entreNiveles(1, 2);
-		
-		
-
 	}
 
 }
