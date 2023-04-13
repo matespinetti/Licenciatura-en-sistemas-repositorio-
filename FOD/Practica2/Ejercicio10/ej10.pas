@@ -31,7 +31,7 @@ begin
     reset (horas);
     while (not Eof(horas)) do
       begin
-        readln(horas, cat, valor);
+        read(horas, cat, valor);
         v[cat] := valor;
       end;  
     Close(horas);
@@ -111,7 +111,6 @@ begin
                             actual.numero := e.numero;
                             while (( actual.departamento = e.departamento) and (actual.division = e.division) and (actual.numero = e.numero)) do
                                 begin
-									
                                     totalEmp.horas := totalEmp.horas + e.horas;
                                     totalDep.horas := totalDep.horas + e.horas;
                                     totalDiv.horas := totalDiv.horas + e.horas;
@@ -122,18 +121,18 @@ begin
                                     leer (arch, e); 
 
                                 end; 
-                            writeln ('Numero empleado: ', actual.numero, ', totalHoras: ', totalEmp.horas, ' Importe a cobrar: ', totalEmp.monto:1:2);
+                            writeln ('Numero empleado: ', actual.numero, ', totalHoras: ', totalEmp.horas, ' Importe a cobrar: ', totalEmp.monto);
             
 
                         end;
                     WriteLn ('Horas division: ', totalDiv.horas);
-                    writeln ('Monto total divison: ', totalDiv.monto:1:2);
+                    writeln ('Monto total divison: ', totalDiv.monto);
                   
 
 
                 end;
             writeln ('Horas departamento: ', totalDep.horas);
-            writeln ('Monto total departamento: ', totalDep.monto:1:2);
+            writeln ('Monto total departamento: ', totalDep.monto);
 
 
 

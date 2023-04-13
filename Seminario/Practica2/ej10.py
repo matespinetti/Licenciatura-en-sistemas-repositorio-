@@ -62,7 +62,6 @@ print("-" * 50)
 print(f"El promedio general de curso es {promedioTotal(promedioAlumnos)}")
 print(f"El estudiante con la nota promedio mas alta es {promedioMasAlto(promedioAlumnos)}")
 print(f"El estudiante con la nota mas baja es {notaMasBaja(alumnosNotas)}")
-print(alumnosNotas["ELIANA"])
 
 
 
