@@ -1,4 +1,4 @@
-nombres = ''' 'Agustin', 'Alan', 'Andrés', 'Ariadna', 'Bautista', 'CAROLINA', 'CESAR',
+nombres = ''' 'Agustin', 'Alan', 'Andrés', 'Ariadna', 'Bautista', 'CAROLINA', 'CESAR', 
 'David','Diego', 'Dolores', 'DYLAN', 'ELIANA', 'Emanuel', 'Fabián', 'Facundo',
 'Francsica', 'FEDERICO', 'Fernanda', 'GONZALO', 'Gregorio', 'Ignacio', 'Jonathan',
 'Joaquina', 'Jorge','JOSE', 'Javier', 'Joaquín' , 'Julian', 'Julieta', 'Luciana',
@@ -13,7 +13,6 @@ notas_2 = [30, 95, 28, 84, 84, 43, 66, 51, 4, 11, 58, 10, 13, 34, 96, 71, 86, 37
 95, 19, 47, 15, 31, 39, 15, 74, 33, 57, 10]
 
 listaNombres = nombres.replace('\'', '').replace('\n', '').replace(" ", "").split(",")
-print(listaNombres)
 
 def crearTodasNotas (listaNombres, notas1, notas2):
     alumnos = {}
@@ -44,7 +43,7 @@ def notaMasBaja (notasAlumnos) :
 
 
 alumnosNotas = crearTodasNotas(listaNombres, notas_1, notas_2)
-
+print(alumnosNotas) #lo imprimo primero entero y despues alumno por alumno para que sea mas legible
 print("Notas de los alumnos: ")
 for clave, valor in alumnosNotas.items():
     print(f"alumno: {clave}. Nota1: {valor[0]}, Nota2: {valor[1]}")
