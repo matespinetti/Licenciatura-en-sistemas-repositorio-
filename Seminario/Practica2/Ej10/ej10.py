@@ -35,7 +35,7 @@ def promedioMasAlto (promedios):
     return max(promedios, key= promedios.get)
 
 def notaMasBaja (notasAlumnos) :
-    return min(notasAlumnos, key=notasAlumnos.get)
+    return min(notasAlumnos, key=lambda clave: min(notasAlumnos[clave]))
 
 
 
