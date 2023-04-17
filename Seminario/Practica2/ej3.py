@@ -18,3 +18,5 @@ while not(letra in string.ascii_letters):
 contienen = [x for x in textList if x.startswith(letra)]
 for x in contienen:
     print(x)
+
+print(contienen)
