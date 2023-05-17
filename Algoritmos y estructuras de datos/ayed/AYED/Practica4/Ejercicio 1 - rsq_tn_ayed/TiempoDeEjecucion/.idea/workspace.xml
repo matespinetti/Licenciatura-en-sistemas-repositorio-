@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="127bf6e9-4fbb-4bb6-9ef2-07540232a93d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../src/ConjuntoParciales/Ejercicio7/PruebaEj1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../src/ConjuntoParciales/ParcialProducto/ProductoHojasProfundas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../src/ParcilProcesador/ProcesadorDeArbol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/PruebaParcial/CodigoZigZag.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/PruebaParcial/CodigoZigZag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/tp03/ejercicio1/ArbolBinario.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/tp03/ejercicio1/ArbolBinario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/tp04/ejercicio1/ArbolGeneral.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/tp04/ejercicio1/ArbolGeneral.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/tp04/ejercicio3/Prueba.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/tp04/ejercicio3/Prueba.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../.." />
+  </component>
+  <component name="ProjectId" id="2PqGDQpXMFS0qtJL8riraShnc36" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "E:/Licenciatura-en-sistemas-repositorio-/Algoritmos y estructuras de datos/ayed/AYED/Practica4/Ejercicio 1 - rsq_tn_ayed",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="127bf6e9-4fbb-4bb6-9ef2-07540232a93d" name="Changes" comment="" />
+      <created>1684177077881</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684177077881</updated>
+      <workItem from="1684177078909" duration="13000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

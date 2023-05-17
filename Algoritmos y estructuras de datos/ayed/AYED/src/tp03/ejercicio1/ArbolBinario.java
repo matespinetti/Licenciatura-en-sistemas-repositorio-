@@ -1,5 +1,8 @@
 package tp03.ejercicio1;
+import ConjuntoParciales.Ejercicio2.Personaje;
 import tp02.ejercicio3.*;
+import tp04.ejercicio1.ArbolGeneral;
+
 public class ArbolBinario<T> {
 	private T dato;
 	private ArbolBinario<T> hijoIzquierdo;
@@ -162,6 +165,13 @@ public class ArbolBinario<T> {
 			this.getHijoDerecho().imprimirArbol();
 		}
 	}
+
+
+
+
+	}
+
+
 	
 
-}
+
