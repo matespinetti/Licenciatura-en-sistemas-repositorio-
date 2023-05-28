@@ -1,0 +1,34 @@
+1) En un principio, en la funcion obtengo datos calcula un numero random entre el 0 y el 1. Si el numero es 0, carga en la variable datos la informacion que proviene del archivo
+datos.json utilizando el json.load. En cambio, si la opcion es 1, trae la informacion desde datos.csv utilizando un csvReader, lee el encabezado y la primera linea y usando un dict, zip arma un diccionario con las claves correspondientes al encabezado y los valores
+correspondiendo la primera fila. Luego a una variable datos le asigna el resultado de la llamar a la funcion obtengo datos. Luego se crea una variable lista vacia, para agregar los integrantes. Luego se instancia un objeto de tipo banda, al cual se le pasa como parametro el nombre de la banda que
+esta almacenado en diccionario datos, con la clave nombre. Luego se itera sobre la cantidad de integrantes que esta almacenada en el diccionario datos y por cada iteracion se lee un integrante por teclado y se agrega a la lista de integrantes. Finalmente, la lista de integrantes se guarda en el objeto banda utilizando
+el metodo agregar integrante. Luego se imprime la bamda.
+
+ Init es el constructor de la clase banda. Este toma como parametro obligatorio un nombre y como parametro opcional el genero, que por defecto es none. Cuando se llama a este, se crean tres variables de instancia, nombre, genero e integrantes. Las dos primeras son publicas e integrantes es "privada". La variable integrantes es una lista vacia. La clase tiene una variable de clase
+denominada generos. Cuando se llama al __init__, se agrega el genero a la variable de clase generos, que es un conjunto.
+El STR se llama cuando se hace un print() de un objeto de la clase Banda. Este devuelve un string conformado por el nombre de la banda, el genero y la lista de integrantes.
+Un objeto de clase banda tiene 3 variables de instancia y se creo un objeto en el programa.
+
+2) La excepcion se produce en el caso de que randRange(2) de como resultado 1. Ya que al producirse esto, la funcion obtengoDatos() devuelve un diccionario con la informacion que proviene desde el archivo
+datos.csv, la cual se carga en formato string, por lo cual a la clave "cant-integrantes" se le asigna el valor "3" (string). Por esto al intentar ejecutar el for de la linea 28
+el rango no es valido ya que este no es un integer.
+
+
+4) Se pueden levantar excepciones cuando se abren los archivos, en caso de que estos no existan, ya que se los abre en modo de lectura. Estos se producen en la linea 9 y 13. A su vez, si alguno de los archivos esta vacio y cuando calcula el numero random accede a ese archivo, cuadno instancia el objeto y le pasa como parametro datos["Nombre"] va a levantarse la excepcion keyError ya que si el archivo esta vacio,
+la funcion devolvera un diccionario vacio y la clave nombre no va a existir en ese diccionario. Otra excepcion que se puede levantar es stopIteration si el csv esta vacio, cuando realiza un next(csvReader) levanta la excepcion.
+
+
+
+5) Main.py
+
+Linea 1: Se hacen dos imports en una misma linea. Es mejor hacer uno por linea.
+linea 5: La funcion obtengoDatos deberia renombrase a obtengo_datos para respetar el snakecase.
+linea 9: La variable Datos deberia renombrarse a datos para respetar el snake_case. A su vez, hay que agregar un espacio antes y despues del igual.
+Linea 26: Luego del igual no se deja un espacio para escribir [].
+
+
+clases.py
+
+linea 6, 7 y 8: Agregar espacio vacio antes y despues del igual.
+linea 12: Hay mas indentacion de la necesaria.
+
