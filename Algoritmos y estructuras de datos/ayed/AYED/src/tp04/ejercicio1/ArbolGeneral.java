@@ -165,8 +165,38 @@ public class ArbolGeneral<T> {
 
 	}
 
+
+	private boolean encontrarDescendiente (ArbolGeneral<T> arbol, T b) {
+		boolean encontre = false;
+		if (arbol.getDato().equals(b)) {
+			encontre = true;
+		}
+		else {
+			ListaGenerica<ArbolGeneral<T>> hijos = arbol.getHijos();
+			hijos.comenzar();
+			while (!hijos.fin() && !encontre) {
+				encontre = encontrarDescendiente(hijos.proximo(), b);
+			}
+
+
+		}
+
+		return encontre;
+	}
 	public boolean esAncestro(T a, T b){
-			return true;
+		boolean esAnce = false;
+		if (this.getDato().equals(a)) {
+			esAnce = encontrarDescendiente(this, b);
+		}
+		else {
+			ListaGenerica<ArbolGeneral<T>> hijos = this.getHijos();
+			hijos.comenzar();
+			while (!hijos.fin() && !esAnce) {
+				esAnce = hijos.proximo().esAncestro(a,b);
+			}
+		}
+
+		return esAnce;
 	}
 
 
