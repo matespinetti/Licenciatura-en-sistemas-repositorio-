@@ -1,0 +1,48 @@
+
+1) Mi funcion toma como parametro dos argumentos. Uno obligatorio, datos, y el otro opcional *args
+que recibe un conjunto de parametros que se evaluan como una tupla. En mis_datos
+
+Respuestas
+
+PARTE 1
+1) La puedo invocar con infinitos parametros, ya que mi_funcion toma un argumento obligatorio (datos)
+y un argumento opcional (*args), que es una tupla, entonces nosotros debemos llamar a la funcion con al menos
+un parametro (que sera datos) y luego convertira el resto de los parametros en una tupla.
+
+
+2) La funcion retorna un diccionario que contiene los pokemones pasados por parametro como clave si
+se encuentra alguna linea en el csv cuyo origen sea "web". A cada pokemon se le asigna como valor su
+minimo indice raro encontrado en el csv, siempre y cuando su origen sea "web".
+
+3) Yo considero que si es correcto el manejo del archivo realizado, sin embargo yo hubiese utilizado
+un DICTreader ya que podes acceder a cada campo de los registros mediante el nombre de la columna.
+
+4) reader es de tipo csv_reader que es un iterador. Se hace la conversion a list ya que sino no puede
+ser accedida luego de cerrar el archivo. A su vez, se convierte a list ya que sino no se puede reiniciar
+el indice y puede ser recorrido una unica vez. Si es necesario realizar la conversion, para poder
+acceder a la variable datos_log luego de cerrar el archivo.
+
+
+PARTE 2:
+Explicacion de mi solucion: En la linea 3, leo el csv utilizando la funcion pd.read_csv()
+y la cargo en la variable data_set que es de tipo DataFrame. Luego en la linea 5 filtro las lineas
+del csv cuyo nombre de usuario esta dentro de la tupla usuarios (linea 4) y cuyo origen es "web".
+Esto lo asigno a la variable filas, que tambien es de tipo dataframe. Luego en la linea 6 utilizo
+el metodo groupby() para agrupar las filas por usuario y aplico la funcion min() a la columna
+indice_raro dentro de cada grupo. Esto te da el valor minimo del indice raro para cada usuario.
+El resultado minimos_por_usuario es un serioes de pandas, donde los indices son los usuarios
+y los valores son los minimos.
+
+
+Parte3:
+
+Dos ventajas:
+1- Pandas proporciona estructuras llamadas DataFrames, que permiten trabajar con datos de manera
+mas intuitiva. Estan optimizadas para analisis y manipulacion de datos. A su vez, ofrence metodos para
+trabajar con valor faltantes --> nulos o NAN. Incluye funciones dropna, para eliminar filas o
+columnas con uno o mas valores faltantes.
+- Para el analisis y manipulacion de datos, pandas proporcioina funciones y metodos que te permiten
+realizar estas tareas de manera mas eficiente y sencilla, como los metodos groupBy, value_counts
+sort_values, etc.
+
+
