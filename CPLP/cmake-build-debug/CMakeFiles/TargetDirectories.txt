@@ -1,0 +1,3 @@
+D:/Licenciatura en sistemas/CPLP/cmake-build-debug/CMakeFiles/CPLP.dir
+D:/Licenciatura en sistemas/CPLP/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Licenciatura en sistemas/CPLP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
